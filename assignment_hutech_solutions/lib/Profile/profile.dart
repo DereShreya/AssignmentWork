@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:assignment_hutech_solutions/Profile/Model/UserModel.dart';
 import 'package:assignment_hutech_solutions/constants/appBarWidget.dart';
 import 'package:assignment_hutech_solutions/constants/colors.dart';
@@ -5,6 +7,7 @@ import 'package:assignment_hutech_solutions/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key,});
@@ -20,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   TextEditingController practionerIDController = TextEditingController();
   TextEditingController billingAddressController = TextEditingController();
   bool enableEditButton = false;
+  XFile? image;
 
   @override
   void initState() {
@@ -48,8 +52,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                       child: Row(
                         children: [
-                          CircleAvatar(
-                            radius: 30,
+                          GestureDetector(
+                            onTap: () async{
+                              final ImagePicker picker = ImagePicker();
+                               image = await picker.pickImage(source: ImageSource.camera);
+                               setState(() {
+                                 
+                               });
+                            },
+                            child: CircleAvatar(
+                              radius: 40,
+                              child: image!=null? ClipRRect(
+                                 borderRadius: BorderRadius.circular(50.0),
+                                child: Image.file(File(image!.path),height: 100,width: 100,fit: BoxFit.fill, )):null,
+                            ),
                           ),
                           SizedBox(
                             width: 20,
@@ -183,7 +199,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 10,
                   ),
-                  new TextFormField(
+                  TextFormField(
                     controller: emailController..text = snapshot.data!.docs.isEmpty?"": "${snapshot.data!.docs[0]['email']}",
                     readOnly: !enableEditButton,
                     keyboardType: TextInputType.emailAddress,
@@ -323,8 +339,9 @@ class _ProfilePageState extends State<ProfilePage> {
       billingAddress: billingAddressController.text.toString(),
       email: emailController.text.toString(),
       phone: phoneController.text.toString(),
-      practionerId: practionerIDController.text.toString()
+      practionerId: practionerIDController.text.toString(),
     );
+    
     var currentUserDocument =
             await FirebaseFirestore.instance.collection(userCollection)
                 .doc("users1").get();
