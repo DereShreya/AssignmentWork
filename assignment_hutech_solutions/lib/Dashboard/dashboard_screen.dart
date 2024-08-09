@@ -106,12 +106,12 @@ class _DashboardPageState extends State<DashboardPage> {
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  // crossAxisSpacing: 20,
-                  mainAxisSpacing: 15
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10
                 ),//(orientation == Orientation.portrait) ? 2 : 3
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin:EdgeInsets.symmetric(horizontal: 10),
+                  return Padding(
+                    padding:EdgeInsets.symmetric(horizontal: 10),
                     child: GestureDetector(
                       onTap: (){
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailsPage(
@@ -128,6 +128,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     )
                   );
                 },
+              ),
+               SizedBox(
+                height: 80,
               ),
             ],
           ),

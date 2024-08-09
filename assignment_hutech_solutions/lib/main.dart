@@ -2,13 +2,24 @@ import 'package:assignment_hutech_solutions/Dashboard/dashboard_screen.dart';
 import 'package:assignment_hutech_solutions/Order/my_order.dart';
 import 'package:assignment_hutech_solutions/Profile/profile.dart';
 import 'package:assignment_hutech_solutions/constants/colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 FirebaseDatabase database = FirebaseDatabase.instance;
 String userCollection = "users";
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: FirebaseOptions(
+    apiKey: 'AIzaSyB7wZb2tO1-Fs6GbDADUSTs2Qs3w08Hovw',
+    appId: '1:922440893098:android:4b01cae68b013a1b8986d3',
+    messagingSenderId: '922440893098',
+    projectId: 'assignment-ae461',
+    // storageBucket: 'myapp-b9yt18.appspot.com',
+  )
+);
   runApp(MyApp());
 }
 

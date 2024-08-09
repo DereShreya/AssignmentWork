@@ -5,8 +5,9 @@ Widget medicineItem({int ?index}){
   return Column(
     children: [
       Container(
-        height: 180,
-        width: 300,
+        height:140,
+        // width: 300,
+        padding: EdgeInsets.all(10),
         margin: EdgeInsets.only(
             bottom: 5
         ),
@@ -26,7 +27,7 @@ Widget medicineItem({int ?index}){
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top:10.0),
+              padding: const EdgeInsets.only(top:0.0),
               child: Align(
                 alignment:Alignment.topLeft,
                 child: Container(
@@ -56,12 +57,12 @@ Widget medicineItem({int ?index}){
               index==3?"assets/images/image4.png":
               "assets/images/image5.png",
 
-              height: 100, ),
+              height: 60, ),
             Padding(
-              padding: const EdgeInsets.only(right:10.0,bottom: 10.0),
+              padding: const EdgeInsets.only(top: 5,right:10.0),
               child: Align(
                 alignment:Alignment.bottomRight,
-                child: Image.asset('assets/images/btn.png',height: 40,),
+                child: Image.asset('assets/images/btn.png',height: 30,),
               ),
             )
           ],
@@ -76,10 +77,11 @@ Widget medicineItem({int ?index}){
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
         ),
       )
-    ],
+   
+       ],
   );
 }
